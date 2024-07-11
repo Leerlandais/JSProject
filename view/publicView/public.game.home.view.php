@@ -11,7 +11,9 @@
 <body>
 <div id="globalDiv">
 <h1 id="mainHeading"><?=$mainHeading?></h1>
-
+<?php
+ var_dump($allGames);
+?>
     <div id="gameHolder" class="container-fluid">
             <div class="gameWindow w-auto h-auto border border-blue-300"></div>
     </div>
