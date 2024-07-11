@@ -23,6 +23,14 @@
             }
         ?>
     </div>
+    <div>
+        <ul>
+            <li>Windows for games</li>
+            <li>Login</li>
+            <li>The games</li>
+            <li>Leaderboard</li>
+        </ul>
+    </div>
 
 </div> <!-- end global -->
 <script src="scripts/sharedScript.js"></script>
