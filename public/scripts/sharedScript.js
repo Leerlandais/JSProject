@@ -12,9 +12,9 @@ console.log(gameWindow.length);
 function makeItSpin() {
     let spinThis = this;
     spinThis.classList.toggle("spinIt");
-
+    let spinUrl = spinThis.getAttribute("url");
     setTimeout(function () {
-    alert("All good");
+    window.open(spinUrl, "_self");
     }, 1250);
 
 

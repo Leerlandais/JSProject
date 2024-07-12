@@ -21,7 +21,7 @@
         ?>
                 <div id="innerHolder" class="flex flex-col">
                     <h3 class="mb-4 text-center text-4xl font-bold italic text-gray-900 dark:text-white"><?=$game["jsl_game_name"]?></h3>
-                    <div class="gameWindow w-auto h-auto border border-blue-300" style="background-image: <?=$game['jsl_game_image']?>"></div>
+                    <div class="gameWindow w-auto h-auto border border-blue-300" style="background-image: <?=$game['jsl_game_image']?>" url="<?=$game['jsl_game_url']?>"></div>
                 </div>
         <?php
             }
