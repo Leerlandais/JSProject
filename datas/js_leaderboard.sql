@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jul 11, 2024 at 04:37 PM
+-- Generation Time: Jul 12, 2024 at 05:21 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -45,6 +45,9 @@ DROP TABLE IF EXISTS `jsl_games`;
 CREATE TABLE IF NOT EXISTS `jsl_games` (
   `jsl_game_id` tinyint UNSIGNED NOT NULL AUTO_INCREMENT,
   `jsl_game_name` varchar(128) NOT NULL,
+  `jsl_game_image` varchar(255) NOT NULL,
+  `jsl_game_url` varchar(255) NOT NULL,
+  `jsl_game_desc` varchar(255) NOT NULL,
   `jsl_game_visibility` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`jsl_game_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
@@ -53,10 +56,10 @@ CREATE TABLE IF NOT EXISTS `jsl_games` (
 -- Dumping data for table `jsl_games`
 --
 
-INSERT INTO `jsl_games` (`jsl_game_id`, `jsl_game_name`, `jsl_game_visibility`) VALUES
-(1, 'Snake', 1),
-(2, 'Memory Game', 1),
-(3, 'Minefield', 1);
+INSERT INTO `jsl_games` (`jsl_game_id`, `jsl_game_name`, `jsl_game_image`, `jsl_game_url`, `jsl_game_desc`, `jsl_game_visibility`) VALUES
+(1, 'Snake', 'url(images/snake.png)', '', '', 1),
+(2, 'Memory Game', 'url(images/memCardGame.png)', '', '', 1),
+(3, 'Minefield', '', '', '', 1);
 
 -- --------------------------------------------------------
 

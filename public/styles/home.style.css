@@ -1,0 +1,29 @@
+.spinIt {
+    transform: rotateY(-360deg);
+}
+.gameHolder {
+    width: 85%;
+    height: 40vw;
+    margin-bottom: 2vh;
+    transition: transform 2000ms ease-in-out;
+    margin: 0 auto;
+}
+
+.gameWindow {
+
+    border: 2px solid  hsla(211, 36%, 46%, 1);
+    border-radius: 20px;
+       background-image: url("../images/PurpleDevil.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    transition: all 1500ms ease-in-out;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    width: 20vw;
+    height: 25vh;
+    margin: 1vh auto;
+    /* width and height in media */
+}
