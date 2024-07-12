@@ -11,7 +11,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <style>canvas{background: rgba(51, 170, 51, .3); margin: 5vh auto;} </style>
+    <style>canvas{background: rgba(0, 0, 0, .6); margin: 5vh auto;} </style>
     <title>Snake</title>
 </head>
 <body>
@@ -19,17 +19,23 @@
     <h1 id="mainHeading"></h1>
     <h2 id="subHeading"></h2>
 
-    <canvas id="snake" width="800" height="600"></canvas>
+    <canvas id="snake"></canvas>
 
-    <button id="nextPage"></button>
+    <select name="speedSelect" id="speedSelect" class="mb-16">
+        <option value="200">200</option>
+        <option value="150">150</option>
+        <option value="100" selected>100</option>
+        <option value="50">50</option>
+    </select>
+    <button id="snakeStartButton">Begin</button>
 
     <footer>
         &copy; <a href="https://leerlandais.com" target="_blank">Lee Brennan</a>
     </footer>
 </div>
 
-<script src="scripts/sharedScript.js"></script>
-<script src="scripts/exe-16-snake.js"></script>
+<div>Fonts made from <a href="http://www.onlinewebfonts.com">Web Fonts</a> is licensed by CC BY 4.0</div>
+<script src="scripts/newSnake.js"></script>
 </body>
 </html>
 
