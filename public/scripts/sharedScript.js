@@ -8,7 +8,7 @@ mainHeading.className = "my-16 text-center text-6xl font-extrabold text-gray-900
 for (let i=0; i<gameWindow.length; i++) {
     gameWindow[i].addEventListener("click", makeItSpin);
 }
-console.log(gameWindow.length);
+
 function makeItSpin() {
     let spinThis = this;
     spinThis.classList.toggle("spinIt");
@@ -16,6 +16,4 @@ function makeItSpin() {
     setTimeout(function () {
     window.open(spinUrl, "_self");
     }, 1250);
-
-
 }
