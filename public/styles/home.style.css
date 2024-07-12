@@ -27,3 +27,8 @@
     margin: 1vh auto;
     /* width and height in media */
 }
+
+canvas{
+    background: rgba(0, 0, 0, .6);
+    margin: 5vh auto;
+}

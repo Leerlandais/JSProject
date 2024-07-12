@@ -1,7 +1,7 @@
 <?php
 
-if (isset($_GET["route"])) {
-    $route = $_GET["route"];
+
+    $route = $_GET["route"] ?? "home";
     switch ($route) {
         case "home" :
             $allGames = getAllGamesForHomepage($db);
@@ -11,19 +11,16 @@ if (isset($_GET["route"])) {
             break;
         case "snake" :
             $title = "sssSnake";
+            $mainHeading = "Snake";
             include(PROJECT_DIRECTORY."/view/publicView/public.snake.view.php");
+            break;
         case "leader" :
             $title = "Leaderboard";
             $mainHeading = "Top 10 Scores";
             include(PROJECT_DIRECTORY."/view/publicView/public.game.leaderboard.view.php");
+            break;
         default :
             $title = "404";
             include(PROJECT_DIRECTORY."/view/publicView/public.404.view.php");
     }
-}else {
-    $mainHeading = "Games";
-    $title = "Games | Home";
-    $allGames = getAllGamesForHomepage($db);
-    include(PROJECT_DIRECTORY."/view/publicView/public.game.home.view.php");
-    die();
-}
+

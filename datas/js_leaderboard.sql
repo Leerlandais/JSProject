@@ -20,8 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `js_leaderboard`
 --
-CREATE DATABASE IF NOT EXISTS `js_leaderboard` DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci;
-USE `js_leaderboard`;
+
 
 -- --------------------------------------------------------
 

@@ -1,7 +1,6 @@
 <?php
 
 session_start();
-if(!isset($_SESSION["user_lang"])) $_SESSION["user_lang"] = "en";
 
 require_once("../config.php");
 require_once(PROJECT_DIRECTORY."/controller/dbConnectController.php");

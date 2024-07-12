@@ -6,7 +6,7 @@ $sql = "SELECT * FROM jsl_games
         ORDER BY jsl_game_id ASC";
 $query = $db->query($sql);
 if ($query->rowCount() === 0) return null;
-$result = $query->fetchAll(PDO::FETCH_ASSOC);
+$result = $query->fetchAll();
 $query->closeCursor();
 return $result;
 }
