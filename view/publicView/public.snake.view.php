@@ -16,23 +16,23 @@
 
     <canvas id="snake"></canvas>
 
-
-        <label for="speedSelect" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select your Speed</label>
-        <select id="speedSelect" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto mx-auto p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+<div class="flex flex-row mx-auto w-fit">
+        <label for="speedSelect"><h3 class="text-3xl mb-6 pe-6 text-gray-900 dark:text-white">Select your Speed</h3></label>
+        <select id="speedSelect" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-auto h-10 mx-auto px-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
         <option value="200">200</option>
         <option value="150">150</option>
         <option value="100" selected>100</option>
         <option value="50">50</option>
     </select>
-    <button id="snakeStartButton">Begin</button>
-
+</div>
+    <button id="snakeStartButton" class="bg-gradient-to-b w-max mx-auto my-12 text-blue-500 font-semibold from-slate-50 to-blue-100 px-10 py-3 rounded-2xl shadow-blue-600 shadow-md border-b-4 hover border-b border-blue-200 hover:shadow-sm transition-all duration-500">Begin</button>
 
     <footer>
         &copy; <a href="https://leerlandais.com" target="_blank">Lee Brennan</a>
     </footer>
 </div>
 
-<div>Fonts made from <a href="http://www.onlinewebfonts.com">Web Fonts</a> is licensed by CC BY 4.0</div>
+<div class="hidden">Fonts made from <a href="http://www.onlinewebfonts.com">Web Fonts</a> is licensed by CC BY 4.0</div>
 <script src="scripts/newSnake.js"></script>
 <script src="scripts/sharedScript.js"></script>
 </body>

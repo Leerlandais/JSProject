@@ -40,7 +40,7 @@ let gameTimer = 100,
     foodCount = 0,
     consumedFood = 0;
 snakeStartButton.addEventListener("click", function() {
-
+snakeStartButton.disabled = true;
     gameTimer = speedSelect.value;
 speedSelect.disabled = true;
 console.log(gameTimer);
@@ -68,12 +68,10 @@ preloadImages(snakeImages, () => {
     console.log('All images preloaded');
 });
 
-// très facile de trouver le centre avec canvas...je me rappel de les difficultés pour faire le même avec snake_v1
 let snakeX = canvasWidth/ 2,
     snakeY = canvasHeight / 2;
 let snakeDirection = "LEFT";
-let snakeBodyArray = []; // un tableaux pour contenir le Snake
-// et un boucle pour le definir
+let snakeBodyArray = [];
 
 for (let i = 0; i < snakeBaseLength; i++) {
     snakeBodyArray.push({ x: snakeX + i * snakeSegment, y: snakeY, direction: snakeDirection });
@@ -83,7 +81,6 @@ let foodX, foodY;
 
 let gameInterval= setInterval(() => {
     if(gameOn === true){
-// MaJ du Snake 10/s
         updateSnake();
     }
 }, gameTimer);
@@ -92,15 +89,12 @@ function prepareFood() {
     foodCount = Math.floor(Math.random() * spiderImages.length);
     consumedFood++;
 
-    // pour permettre facile changement de taille du canvas, mieux des variables que des montant fixe
     const maxWidth = Math.floor(canvasWidth / snakeSegment);
     const maxHeight = Math.floor(canvasHeight / snakeSegment);
 
-    // sélection d'un position pour Food
     foodX = Math.floor(Math.random() * maxWidth) * snakeSegment;
     foodY = Math.floor(Math.random() * maxHeight) * snakeSegment;
 
-    // De fois, Food est placé sur le Snake - ceci est pour le prevenir
     for (let i = 0; i < snakeBodyArray.length; i++) {
         if (foodX === snakeBodyArray[i].x && foodY === snakeBodyArray[i].y) {
             prepareFood();
@@ -116,7 +110,6 @@ function placeFood() {
 }
 
 
-// et un fonction pour lui placer sur le canvas
 function createSnake() {
     let imgHead = new Image(),
         imgBodyH = new Image(),
@@ -146,14 +139,12 @@ function createSnake() {
     imgBodyH.src = "images/snake/body_horizontal.png";
     imgBodyV.src = "images/snake/body_vertical.png";
 
-    // toujours nettoyage avant dessiner
     context.clearRect(0, 0, canvasWidth, canvasHeight);
 
     snakeBodyArray.forEach((snakePart, index) => {
-        if (index === 0) { // index 0 = tête
+        if (index === 0) {
             context.drawImage(imgHead, snakePart.x, snakePart.y, snakeSegment, snakeSegment);
-        } else if (index === snakeBodyArray.length - 1) { // et array.length -1 = queue
-            // detérmine direction pour queue selon direction du voisin
+        } else if (index === snakeBodyArray.length - 1) {
             let tailDir = snakeBodyArray[snakeBodyArray.length - 2].direction;
             if (tailDir === 'LEFT') {
                 imgTail.src = "images/snake/tail_right.png";
@@ -165,12 +156,11 @@ function createSnake() {
                 imgTail.src = "images/snake/tail_up.png";
             }
             context.drawImage(imgTail, snakePart.x, snakePart.y, snakeSegment, snakeSegment);
-        } else { // si pas tête ni queue, verifier si c'est courbé
+        } else {
             let nextSegment = snakeBodyArray[index - 1];
 
             let isBent = false;
             let bendImage ="";
-            // passer par toutes possibilités du courbe
             if (snakePart.direction === "UP" && nextSegment.direction === 'LEFT') {
                 bendImage = "images/snake/body_bottomleft.png";
                 isBent = true;
@@ -196,12 +186,10 @@ function createSnake() {
                 bendImage = "images/snake/body_bottomleft.png";
                 isBent = true;
             }
-            // et appliquer l'image nécessaire
             if (isBent) {
                 imgBend.src = bendImage;
                 context.drawImage(imgBend, snakePart.x, snakePart.y, snakeSegment, snakeSegment);
             } else {
-                // detérmine si morceaux non-courbé sont horizontal ou vertical
                 if (snakePart.direction === 'LEFT' || snakePart.direction === 'RIGHT') {
                     context.drawImage(imgBodyH, snakePart.x, snakePart.y, snakeSegment, snakeSegment);
                 } else if (snakePart.direction === 'UP' || snakePart.direction === 'DOWN') {
@@ -220,35 +208,35 @@ function createSnake() {
 
 
 
-document.addEventListener('keydown', function(btnPressed) {
-
-    // tableaux pour les touches clavier
-    // avec AZERTY "KeyW" == "Z"
-    if (btnPressed.code === "ArrowUp" || btnPressed.code === "ArrowDown") {
-        btnPressed.preventDefault();
+// Step 1: Define the function separately
+    function keyListener(btnPressed) {
+        if (btnPressed.code === "ArrowUp" || btnPressed.code === "ArrowDown") {
+            btnPressed.preventDefault();
+        }
+        if (btnPressed.repeat) return;
+        let leftButtons = ["ArrowLeft", "Numpad4", "KeyA"],
+            rightButtons = ["ArrowRight", "Numpad6", "KeyD"],
+            upButtons = ["ArrowUp", "Numpad8", "KeyW"],
+            downButtons = ["ArrowDown", "Numpad2", "KeyS"];
+        if (leftButtons.includes(btnPressed.code) && snakeDirection !== "RIGHT") {
+            snakeDirection = "LEFT";
+        } else if (rightButtons.includes(btnPressed.code) && snakeDirection !== "LEFT") {
+            snakeDirection = "RIGHT";
+        } else if (upButtons.includes(btnPressed.code) && snakeDirection !== "DOWN") {
+            snakeDirection = "UP";
+        } else if (downButtons.includes(btnPressed.code) && snakeDirection !== "UP") {
+            snakeDirection = "DOWN";
+        }
+        gameOn = true;
+        updateSnake(snakeDirection);
     }
-    if (btnPressed.repeat) return;
-    let leftButtons = ["ArrowLeft", "Numpad4","KeyA"],
-        rightButtons = ["ArrowRight", "Numpad6", "KeyD"],
-        upButtons = ["ArrowUp", "Numpad8", "KeyW"],
-        downButtons = ["ArrowDown", "Numpad2", "KeyS"];
-    // Si Up/Down, ne bouge pas l'écran
-    if (leftButtons.includes(btnPressed.code) && snakeDirection !== "RIGHT"){
-        snakeDirection = "LEFT";
-    } else if (rightButtons.includes(btnPressed.code) && snakeDirection !== "LEFT") {
-        snakeDirection = "RIGHT";
-    } else if (upButtons.includes(btnPressed.code) && snakeDirection !== "DOWN") {
-        snakeDirection = "UP";
-    } else if (downButtons.includes(btnPressed.code) && snakeDirection !== "UP") {
-        snakeDirection = "DOWN";
-    }
-    gameOn = true;
 
-    updateSnake(snakeDirection);
-});
+// Step 2: Add the event listener
+    document.addEventListener('keydown', keyListener);
+
+
 
 function updateSnake() {
-    // inclure le direction dans de la tête
     let newHead = {
         x: snakeBodyArray[0].x,
         y: snakeBodyArray[0].y,
@@ -266,28 +254,20 @@ function updateSnake() {
     }
 
 
-    // verifier si tête touche les bordures du canvas
     if (newHead.x < 0 || newHead.x >= canvasWidth || newHead.y < 0 || newHead.y >= canvasHeight) {
-     //   alert("Game Over! T'as touché le mur. Ton score est :" +(snakeBodyArray.length));
         calculateTotalScore();
     }
-    // et aussi pour auto-collision
     for (let i = 1; i < snakeBodyArray.length; i++) {
         if (newHead.x === snakeBodyArray[i].x && newHead.y === snakeBodyArray[i].y) {
-         //   alert("Game Over! Tu t'as bouffé toi-même. Ton score est :" +(snakeBodyArray.length));
         calculateTotalScore();
         }
     }
-    // et finalement pour le Food
     if (newHead.x === foodX && newHead.y === foodY) {
-        // augment la taille du Snake
         snakeBodyArray.push({ x: snakeX * snakeSegment, y: snakeY });
 
-        // et placer un nouveau Food
         prepareFood();
     }
 
-    // Je me rappel de la galère j'ai eu pour faire ceci la première fois mais je ne connaissais pas pop/unshift etc à ce moment
     snakeBodyArray.unshift(newHead);
     snakeBodyArray.pop();
 
@@ -313,14 +293,13 @@ function calculateTotalScore() {
 
     context.clearRect(0, 0, canvasWidth, canvasHeight);
     clearInterval(gameInterval);
-    alert(finalScoreSnake);
-    window.location.reload();
+    document.removeEventListener("keydown", keyListener);
+    alert(finalScoreSnake + " : speed = " + gameTimer);
+
 }
-// appel de fonction pour créér le Snake
 
     createSnake();
     updateSnake();
-// et aussi pour son diner
     prepareFood();
     placeFood();
 });
