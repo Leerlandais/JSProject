@@ -46,7 +46,7 @@ for (let col = 0; col < blockColSize; col++) {
     }
 }
 function drawBlocks() {
-    for (let col = 1; col < blockColSize-1; col++) {
+    for (let col = 2; col < blockColSize-2; col++) {
         for (let row = 1; row < blockRowSize; row++) {
             const blockX = blockOffset + col * (blockWidth + blockSpacing);
             const blockY = row * (blockHeight + blockSpacing);
