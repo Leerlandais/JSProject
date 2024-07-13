@@ -1,0 +1,1 @@
+// pre game logic containing global variable creation

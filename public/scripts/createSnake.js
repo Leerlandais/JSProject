@@ -1,0 +1,1 @@
+// logic for creating snake and food

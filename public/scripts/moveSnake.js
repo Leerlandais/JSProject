@@ -1,0 +1,1 @@
+// logic for updating snake position and collision detection
