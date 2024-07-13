@@ -14,6 +14,7 @@
     <h1 id="mainHeading"><?=$mainHeading?></h1>
     <?php
     // var_dump($allGames);
+    var_dump($leaderboard);
     ?>
 
 </div> <!-- end global -->

@@ -15,6 +15,7 @@
             include(PROJECT_DIRECTORY."/view/publicView/public.snake.view.php");
             break;
         case "leader" :
+            $leaderboard = getAllLeaderboards($db);
             $title = "Leaderboard";
             $mainHeading = "Top 10 Scores";
             include(PROJECT_DIRECTORY."/view/publicView/public.game.leaderboard.view.php");
