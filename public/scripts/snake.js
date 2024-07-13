@@ -6,14 +6,14 @@ const canvas = document.getElementById("snake"),
 const snakeSegment = 30,       // et de lui donner une taille
     snakeBaseLength = 5;  // et un longeur
 
-const segmentsWidth = 30;  // for example, 40 segments wide
-const segmentsHeight = 20; // for example, 20 segments high
+const segmentsWidth = 30;
+const segmentsHeight = 20;
 
 const canvasWidth = snakeSegment * segmentsWidth;
 const canvasHeight = snakeSegment * segmentsHeight;
 canvas.setAttribute("width", canvasWidth);
 canvas.setAttribute("height", canvasHeight);
-// List of image sources
+
 const snakeImages = [
     'images/snake/head_left.png',
     'images/snake/head_right.png',
@@ -299,10 +299,3 @@ function updateSnake() {
     createSnake(snakeDirection);
 }
 
-
-/*
-TO DO :
-
-Add highscore
-Add button selection (separate js file) and tie it in here
-*/

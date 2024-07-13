@@ -39,10 +39,10 @@
 <script src="scripts/sharedScript.js"></script>
 -->
 <script src="scripts/sharedScript.js"></script>
+<script src="scripts/startSnake.js"></script>
 <script src="scripts/stopSnake.js"></script>
 <script src="scripts/createSnake.js"></script>
 <script src="scripts/moveSnake.js"></script>
-<script src="scripts/startSnake.js"></script>
 </body>
 </html>
 
