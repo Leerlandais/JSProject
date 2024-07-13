@@ -7,7 +7,7 @@ function calculateTotalScore() {
             bonusForSpeed = 100;
             break;
         case "100" :
-            bonusForSpeed = 40;
+            bonusForSpeed = 70;
             break;
         case "150" :
             bonusForSpeed = 20;

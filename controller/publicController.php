@@ -17,6 +17,10 @@
             $leaderScores = getLeaderboardForOneGame($db, "Snake");
             include(PROJECT_DIRECTORY."/view/publicView/public.snake.view.php");
             break;
+        case "wallbreak" :
+            $title = "Who remembers Arkanoid?";
+                include(PROJECT_DIRECTORY."/view/publicView/public.walls.view.php");
+                break;
         case "leader" :
             $leaderboard = getAllLeaderboards($db);
             $title = "Leaderboard";
