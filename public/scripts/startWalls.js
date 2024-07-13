@@ -14,13 +14,7 @@ canvas.setAttribute("height", canvasHeight);
 
 
 // Pour le block
-context.beginPath();
-context.rect(blockWidth, blockHeight*2, blockWidth, blockHeight);
-context.strokeStyle = "white";
-context.stroke();
-context.fillStyle = "#FF0000";
-context.fill();
-context.closePath();
+
 
 
 // pour la raquette
@@ -40,3 +34,28 @@ context.stroke();
 context.fillStyle = "#8f12d7";
 context.fill();
 context.closePath();
+
+const blocks = [];
+for (let c = 0; c < blockColSize; c++) {
+    blocks[c] = [];
+    for (let r = 0; r < blockRowSize; r++) {
+        blocks[c][r] = { x: 0, y: 0 };
+    }
+}
+
+function drawBlocks() {
+    for (let col = 0; col < blockColSize; col++) {
+        for (let row = 0; row < blockRowSize; row++) {
+            blocks[col][row].x = 0;
+            blocks[col][row].y = 0;
+            context.beginPath();
+            context.rect(blockWidth, blockHeight*2, blockWidth, blockHeight);
+            context.strokeStyle = "white";
+            context.stroke();
+            context.fillStyle = "#FF0000";
+            context.fill();
+            context.closePath();
+        }
+    }
+}
+drawBlocks();
