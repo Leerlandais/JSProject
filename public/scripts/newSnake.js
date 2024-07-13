@@ -45,7 +45,7 @@ snakeStartButton.disabled = true;
 speedSelect.disabled = true;
 console.log(gameTimer);
 
-
+context.save();
 const images = [];
 function preloadImages(sources, callback) {
     let loadedImagesCount = 0;
@@ -290,11 +290,16 @@ function calculateTotalScore() {
     }
 
     let finalScoreSnake = ((snakeBodyArray.length-1) + consumedFood) * bonusForSpeed;
-
-    context.clearRect(0, 0, canvasWidth, canvasHeight);
+    gameOn = false;
+    let gameRestart = confirm("You scored : "+finalScoreSnake + "!\n Play Again?");
+    context.restore();
     clearInterval(gameInterval);
     document.removeEventListener("keydown", keyListener);
-    alert(finalScoreSnake + " : speed = " + gameTimer);
+    if (gameRestart === true) {
+        window.location.reload();
+    }else {
+        window.open("?route=home", "_self");
+    }
 
 }
 
