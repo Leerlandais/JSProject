@@ -1,3 +1,5 @@
+// logic for Snake endgame
+
 function calculateTotalScore() {
     let bonusForSpeed = 10;
     switch(gameTimer) {
