@@ -8,13 +8,6 @@ require_once(PROJECT_DIRECTORY."/model/laundryModel.php");
 require_once(PROJECT_DIRECTORY."/model/homeModel.php");
 require_once(PROJECT_DIRECTORY."/model/loginModel.php");
 
-if (isset($_SESSION["mySession"])) {
-    $route = $_SESSION["js_user_permission"];
-    if ($route == "255") {
-        require_once PROJECT_DIRECTORY . "/controller/privateController.php";
-        die();
-    }
-}
 require_once(PROJECT_DIRECTORY."/controller/publicController.php");
 
 $db = null;

@@ -4,8 +4,8 @@
 
 function attemptUserLogin (PDO $db, string $name, string $pwd) : bool | string {
     $sql = "SELECT *
-    FROM `np_users`
-    WHERE `np_user_username` = ?";
+    FROM `jsl_users`
+    WHERE `jsl_user_name` = ?";
 
     $stmt = $db->prepare($sql);
 
@@ -14,12 +14,12 @@ function attemptUserLogin (PDO $db, string $name, string $pwd) : bool | string {
         if($stmt->rowCount()===0) return false;
         $result = $stmt->fetch();
 
-        if (password_verify($pwd, $result['np_user_pwd'])) {
+        if (password_verify($pwd, $result['jsl_user_pass'])) {
             $_SESSION = $result;
-            unset($_SESSION['np_user_pwd']);
+            unset($_SESSION['jsl_user_pass']);
             $_SESSION['id'] = session_id();
-            $_SESSION["user_lang"] = $_SESSION["np_user_lang"];
-            // unset($_SESSION["np_user_lang"]);
+            $_SESSION["mySession"] = true;
+           // die(var_dump($_SESSION));
             return true;
         }else {
             return false;

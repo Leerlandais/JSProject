@@ -1,6 +1,8 @@
 <?php
 
 
+
+
     $route = $_GET["route"] ?? "home";
     switch ($route) {
         case "home" :
@@ -12,6 +14,7 @@
         case "snake" :
             $title = "sssSnake";
             $mainHeading = "Snake";
+            $leaderScores = getLeaderboardForOneGame($db, "Snake");
             include(PROJECT_DIRECTORY."/view/publicView/public.snake.view.php");
             break;
         case "leader" :

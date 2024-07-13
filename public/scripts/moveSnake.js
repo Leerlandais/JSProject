@@ -18,11 +18,11 @@ function keyListener(btnPressed) {
     } else if (downButtons.includes(btnPressed.code) && snakeDirection !== "UP") {
         snakeDirection = "DOWN";
     }
-    gameOn = true;
+
     updateSnake(snakeDirection);
 }
 
-document.addEventListener('keydown', keyListener);
+
 
 
 
@@ -45,14 +45,12 @@ function updateSnake() {
 
 
     if (newHead.x < 0 || newHead.x >= canvasWidth || newHead.y < 0 || newHead.y >= canvasHeight) {
-        document.removeEventListener("keydown", keyListener);
-        clearInterval(gameInterval);
+
         calculateTotalScore();
     }
     for (let i = 1; i < snakeBodyArray.length; i++) {
         if (newHead.x === snakeBodyArray[i].x && newHead.y === snakeBodyArray[i].y) {
-            document.removeEventListener("keydown", keyListener);
-            clearInterval(gameInterval);
+
             calculateTotalScore();
         }
     }

@@ -13,7 +13,7 @@ const canvasWidth = snakeSegment * segmentsWidth;
 const canvasHeight = snakeSegment * segmentsHeight;
 canvas.setAttribute("width", canvasWidth);
 canvas.setAttribute("height", canvasHeight);
-
+context.save();
 const snakeImages = [
     'images/snake/head_left.png',
     'images/snake/head_right.png',
@@ -41,7 +41,10 @@ const spiderImages = [
 let gameTimer = 100,
     foodCount = 0,
     consumedFood = 0,
-    snakeBodyArray = [];
+    snakeBodyArray = [],
+    playerScore = document.getElementById("playerScores"),
+    currentHighScore = playerScore.value;
+
 
 const images = [];
 function preloadImages(sources, callback) {
@@ -76,11 +79,7 @@ for (let i = 0; i < snakeBaseLength; i++) {
 let gameOn = false;
 let foodX, foodY;
 
-let gameInterval= setInterval(() => {
-    if(gameOn === true){
-        updateSnake();
-    }
-}, gameTimer);
+let gameInterval;
 
 snakeStartButton.addEventListener("click", startGameSnake);
 
@@ -89,4 +88,11 @@ function startGameSnake () {
     snakeStartButton.disabled = true;
     gameTimer = speedSelect.value;
     speedSelect.disabled = true;
+    gameOn = true;
+    document.addEventListener('keydown', keyListener);
+    gameInterval = setInterval(() => {
+        if(gameOn === true){
+            updateSnake();
+        }
+    }, gameTimer);
 }

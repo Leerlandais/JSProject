@@ -31,7 +31,9 @@
         &copy; <a href="https://leerlandais.com" target="_blank">Lee Brennan</a>
     </footer>
 </div>
-
+<form action="./" method="POST" id="snakeScoreForm">
+    <input type="text" name="playerScore" id="playerScores" value="<?=$leaderScores["jsl_score_value"]?>">
+</form>
 <div class="hidden">Fonts made from <a href="http://www.onlinewebfonts.com">Web Fonts</a> is licensed by CC BY 4.0</div>
 <!--
 <script src="scripts/endSnake.js"></script>

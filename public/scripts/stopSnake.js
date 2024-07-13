@@ -17,6 +17,9 @@ function calculateTotalScore() {
     }
 
     let finalScoreSnake = ((snakeBodyArray.length-1) + consumedFood) * bonusForSpeed;
+    document.removeEventListener("keydown", keyListener);
+    clearInterval(gameInterval);
+
     gameOn = false;
     let gameRestart = confirm("You scored : "+finalScoreSnake + "!\n Play Again?");
     context.restore();

@@ -31,3 +31,24 @@ function getAllLeaderboards(PDO $db) : array|null {
     $query->closeCursor();
     return $result;
 }
+
+function getLeaderboardForOneGame(PDO $db, string $gameId) : array|null|string {
+    $sql = "SELECT game.* , score.`jsl_score_value`
+                FROM `jsl_games` game
+            LEFT JOIN `game_has_score` ghs
+                ON `ghs`.`game_game_id` = game.jsl_game_id
+            LEFT JOIN `jsl_scores` score
+                ON score.jsl_score_id = ghs.score_score_id
+            WHERE `jsl_game_name` = :game";
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':game', $gameId);
+    try{
+    $stmt->execute();
+    if ($stmt->rowCount() === 0) return null;
+    $result = $stmt->fetch();
+    $stmt->closeCursor();
+    return $result;
+    }catch (Exception $e){
+        return $e->getMessage();
+    }
+}
