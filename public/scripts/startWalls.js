@@ -46,10 +46,13 @@ for (let c = 0; c < blockColSize; c++) {
 function drawBlocks() {
     for (let col = 0; col < blockColSize; col++) {
         for (let row = 0; row < blockRowSize; row++) {
-            blocks[col][row].x = 0;
-            blocks[col][row].y = 0;
+            const blockX = col * (blockWidth);
+            const blockY = row * (blockHeight);
+
+            blocks[col][row].x = blockX;
+            blocks[col][row].y = blockY;
             context.beginPath();
-            context.rect(blockWidth, blockHeight*2, blockWidth, blockHeight);
+            context.rect(blockX, blockY, blockWidth, blockHeight);
             context.strokeStyle = "white";
             context.stroke();
             context.fillStyle = "#FF0000";
@@ -59,3 +62,6 @@ function drawBlocks() {
     }
 }
 drawBlocks();
+
+
+
