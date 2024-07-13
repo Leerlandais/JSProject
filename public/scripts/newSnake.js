@@ -38,7 +38,8 @@ const spiderImages = [
 ]
 let gameTimer = 100,
     foodCount = 0,
-    consumedFood = 0;
+    consumedFood = 0,
+    snakeBodyArray = [];
 snakeStartButton.addEventListener("click", function() {
 snakeStartButton.disabled = true;
     gameTimer = speedSelect.value;
@@ -71,7 +72,7 @@ preloadImages(snakeImages, () => {
 let snakeX = canvasWidth/ 2,
     snakeY = canvasHeight / 2;
 let snakeDirection = "LEFT";
-let snakeBodyArray = [];
+
 
 for (let i = 0; i < snakeBaseLength; i++) {
     snakeBodyArray.push({ x: snakeX + i * snakeSegment, y: snakeY, direction: snakeDirection });
@@ -255,10 +256,14 @@ function updateSnake() {
 
 
     if (newHead.x < 0 || newHead.x >= canvasWidth || newHead.y < 0 || newHead.y >= canvasHeight) {
+            document.removeEventListener("keydown", keyListener);
+        clearInterval(gameInterval);
         calculateTotalScore();
     }
     for (let i = 1; i < snakeBodyArray.length; i++) {
         if (newHead.x === snakeBodyArray[i].x && newHead.y === snakeBodyArray[i].y) {
+                document.removeEventListener("keydown", keyListener);
+        clearInterval(gameInterval);
         calculateTotalScore();
         }
     }
@@ -273,35 +278,7 @@ function updateSnake() {
 
     createSnake(snakeDirection);
 }
-function calculateTotalScore() {
-    let bonusForSpeed = 10;
-    switch(gameTimer) {
-        case "50" :
-            bonusForSpeed = 100;
-            break;
-        case "100" :
-            bonusForSpeed = 40;
-            break;
-        case "150" :
-            bonusForSpeed = 20;
-            break;
-        default :
-            bonusForSpeed = bonusForSpeed;
-    }
 
-    let finalScoreSnake = ((snakeBodyArray.length-1) + consumedFood) * bonusForSpeed;
-    gameOn = false;
-    let gameRestart = confirm("You scored : "+finalScoreSnake + "!\n Play Again?");
-    context.restore();
-    clearInterval(gameInterval);
-    document.removeEventListener("keydown", keyListener);
-    if (gameRestart === true) {
-        window.location.reload();
-    }else {
-        window.open("?route=home", "_self");
-    }
-
-}
 
     createSnake();
     updateSnake();
