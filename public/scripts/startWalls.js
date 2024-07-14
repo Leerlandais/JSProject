@@ -12,13 +12,15 @@ const   canvas = document.getElementById("wallbreaker"),
         wallbreakerStartButton = document.getElementById("wallbreakerStartButton"),
         canvasWidth = (ballRadius*2) * blockWidth*0.7,
         canvasHeight = (ballRadius*2) * blockHeight,
-        blockOffset = (canvasWidth - totalBlockWidth) / 2;
+        blockOffset = (canvasWidth - totalBlockWidth) / 2,
+        fillstyles = ["red", "blue", "green", "yellow", "black", "orange", "violet"];
 
 
 let x = canvasWidth / 2,
     y = canvasHeight-((paddleWidth)/2)-ballRadius*2,
-    dx = 2,
-    dy = -2;
+    dx = 3,
+    dy = -3,
+    fillstyle = fillstyles[0];
 
 
 
@@ -79,24 +81,38 @@ function drawBall () {
     context.beginPath();
     context.arc(x, y, ballRadius, 0, Math.PI * 2, false);
    // context.arc(x, y, 10, 0, Math.PI * 2);
-    context.fillStyle = "#8f12d7";
+    context.fillStyle = fillstyle;
     context.fill();
     context.strokeStyle = "rgb(255 255 255)";
     context.stroke();
     context.closePath();
     x += dx;
     y += dy
+    if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+        dx = -dx;
+        changeColour();
+    }
+    if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+        dy = -dy;
+        changeColour();
+    }
+
+function changeColour() {
+    let newColour = Math.floor(Math.random() * fillstyles.length);
+    fillstyle = fillstyles[newColour];
+}
+
 }
 function beginWallGame() {
 setInterval(() => {
     drawBall();
-    drawBlocks();
+ //   drawBlocks();
     drawPaddle();
 }, 10);
 }
 wallbreakerStartButton.addEventListener('click', beginWallGame);
 
 drawBall();
-drawBlocks();
+// drawBlocks();
 drawPaddle();
 // ADD SCREENWIDTH DETECTOR (the usual one) AND WIDTH-REACTION BASED ON IT
