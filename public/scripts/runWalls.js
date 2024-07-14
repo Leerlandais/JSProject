@@ -12,12 +12,12 @@ function collisionDetection () {
     if (y + dy < ballRadius) {
         dy = -dy;
         changeColour();
-    } else if (y + dy > canvasHeight - ballRadius/2) {
-        if (x > paddlePosition && x < paddlePosition + paddleWidth + ballRadius/2) {
+    } else if (y + dy > canvasHeight - ballRadius - paddleHeight*2) {
+        if (x > paddlePosition && x < paddlePosition + paddleWidth + ballRadius) {
             dy = -dy;
             // console.log("paddleCollision");
             changeColour();
-        } else {
+        } else if(y + dy > canvas.height) {
             alert("GAME OVER");
             clearInterval(gameInterval);
             document.location.reload();
@@ -30,9 +30,7 @@ function collisionDetection () {
             if (x > b.x && x < b.x + blockWidth && y > b.y && y < b.y + blockHeight) {
 
                 dy = -dy;
-                console.log(blockArray[c][r]);
                 b.status = false;
-                console.log(b);
             }
         }
     }
@@ -44,19 +42,19 @@ function changeColour() {
 function keyDown(e) {
     if (e.key === "Right" || e.key === "ArrowRight") {
         rightPressed = true;
-        console.log("right pressed");
+      //  console.log("right pressed");
     } else if (e.key === "Left" || e.key === "ArrowLeft") {
         leftPressed = true;
-        console.log("left pressed");
+      //  console.log("left pressed");
     }
 }
 
 function keyUp(e) {
     if (e.key === "Right" || e.key === "ArrowRight") {
         rightPressed = false;
-        console.log("right depressed");
+       // console.log("right depressed");
     } else if (e.key === "Left" || e.key === "ArrowLeft") {
         leftPressed = false;
-        console.log("left depressed");
+       // console.log("left depressed");
     }
 }

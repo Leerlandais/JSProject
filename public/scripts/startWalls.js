@@ -19,28 +19,33 @@ const   canvas = document.getElementById("wallbreaker"),
 
 let x = canvasWidth / 2,
     y = canvasHeight-((paddleWidth)/2)-ballRadius*2,
-    dx = 3,
+    dx,
     dy = -3,
     fillstyle = fillstyles[0],
     paddlePosition = (canvas.width - paddleWidth) / 2,
     paddleSpeed = 5,
     gameInterval = 0;
     rightPressed = false,
-    leftPressed = false;
-
+    leftPressed = false
+    gameRunning = false;
+Math.floor(Math.random() * 100) % 2 === 0 ? dx = -3 : dx = 3;
 canvas.setAttribute("width", canvasWidth);
 canvas.setAttribute("height", canvasHeight);
 
 // pour la raquette
 function drawPaddle() {
+    if (gameRunning) {
     if (rightPressed) {
         paddlePosition = Math.min(paddlePosition + paddleSpeed, canvas.width - paddleWidth);
     } else if (leftPressed) {
         paddlePosition = Math.max(paddlePosition - paddleSpeed, 0);
     }
+    }else {
+        paddlePosition = (canvas.width - paddleWidth) / 2
+    }
 
     context.beginPath();
-context.rect(paddlePosition, canvasHeight-paddleHeight, paddleWidth, paddleHeight);
+context.rect(paddlePosition, canvasHeight-paddleHeight*3, paddleWidth, paddleHeight);
 context.strokeStyle = "black";
 context.stroke();
 context.fillStyle = "#00FF00";
@@ -51,14 +56,10 @@ context.closePath();
 function drawBlocks() {
 // pour les blocks
 
-for (let col = 0; col < blockColSize; col++) {
-    blockArray[col] = [];
-    for (let row = 0; row < blockRowSize; row++) {
-        blockArray[col][row] = { x: 0, y: 0, status: true, fillStyle: fillstyles[(row % blockRowSize)-1] };
-    }
-}
+
     for (let col = 2; col < blockColSize-2; col++) {
         for (let row = 1; row < blockRowSize; row++) {
+
             if (blockArray[col][row].status === true) {
             const blockX = blockOffset + col * (blockWidth + blockSpacing);
             const blockY = row * (blockHeight + blockSpacing);
@@ -95,6 +96,7 @@ function drawBall () {
 
 function beginWallGame() {
     wallbreakerStartButton.disabled = true;
+    gameRunning = true;
 gameInterval = setInterval(() => {
     drawBall();
     drawBlocks();
@@ -103,6 +105,12 @@ gameInterval = setInterval(() => {
 }, 10);
 }
 wallbreakerStartButton.addEventListener('click', beginWallGame);
+for (let col = 0; col < blockColSize; col++) {
+    blockArray[col] = [];
+    for (let row = 0; row < blockRowSize; row++) {
+        blockArray[col][row] = { x: 0, y: 0, status: true, fillStyle: fillstyles[(row % blockRowSize)-1] };
+    }
+}
 
 drawBall();
 drawBlocks();
