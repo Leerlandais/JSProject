@@ -13,7 +13,7 @@ function collisionDetection () {
         dy = -dy;
         changeColour();
     } else if (y + dy > canvasHeight - ballRadius - paddleHeight*2) {
-        if (x > paddlePosition && x < paddlePosition + paddleWidth + ballRadius) {
+        if (x > paddlePosition && x < paddlePosition + paddleWidth + ballRadius/2) {
             dy = -dy;
             // console.log("paddleCollision");
             changeColour();
@@ -25,15 +25,33 @@ function collisionDetection () {
     }
     for (let c = 0; c < blockColSize; c++) {
         for (let r = 0; r < blockRowSize; r++) {
-            // console.log(blockArray);
             const b = blockArray[c][r];
-            if (x > b.x && x < b.x + blockWidth && y > b.y && y < b.y + blockHeight) {
+            if (b.status) { // Check if the block is still active
+                if (x > b.x - ballRadius && x < b.x + blockWidth + ballRadius/2 && y > b.y - ballRadius/2 && y < b.y + blockHeight + ballRadius/2) {
+                    // Determine where the collision occurred
+                    const ballCenterX = x;
+                    const ballCenterY = y;
+                    const blockCenterX = b.x + blockWidth / 2;
+                    const blockCenterY = b.y + blockHeight / 2;
 
-                dy = -dy;
-                b.status = false;
+                    const distX = ballCenterX - blockCenterX;
+                    const distY = ballCenterY - blockCenterY;
+                    const absDistX = Math.abs(distX);
+                    const absDistY = Math.abs(distY);
+
+                    if (absDistX > absDistY) {
+                        // Collision on the sides
+                        dx = -dx;
+                    } else {
+                        // Collision on the top or bottom
+                        dy = -dy;
+                    }
+                    b.status = false; // Deactivate the block
+                }
             }
         }
     }
+
     }
 function changeColour() {
     let newColour = Math.floor(Math.random() * fillstyles.length);

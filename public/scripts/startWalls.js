@@ -3,7 +3,7 @@ const   canvas = document.getElementById("wallbreaker"),
         ballRadius = 10,
         blockWidth = 80,
         blockHeight = 30,
-        blockSpacing = 5,
+        blockSpacing = 10,
         blockRowSize = 5,
         blockColSize = 15,
         blockArray = [],
@@ -20,15 +20,15 @@ const   canvas = document.getElementById("wallbreaker"),
 let x = canvasWidth / 2,
     y = canvasHeight-((paddleWidth)/2)-ballRadius*2,
     dx,
-    dy = -3,
+    dy = -6,
     fillstyle = fillstyles[0],
     paddlePosition = (canvas.width - paddleWidth) / 2,
-    paddleSpeed = 5,
+    paddleSpeed = 8,
     gameInterval = 0;
     rightPressed = false,
     leftPressed = false
     gameRunning = false;
-Math.floor(Math.random() * 100) % 2 === 0 ? dx = -3 : dx = 3;
+Math.floor(Math.random() * 100) % 2 === 0 ? dx = -6 : dx = 6;
 canvas.setAttribute("width", canvasWidth);
 canvas.setAttribute("height", canvasHeight);
 
