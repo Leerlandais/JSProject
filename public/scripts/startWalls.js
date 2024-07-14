@@ -6,6 +6,7 @@ const   canvas = document.getElementById("wallbreaker"),
         blockSpacing = 5,
         blockRowSize = 5,
         blockColSize = 15,
+        blockArray = [],
         paddleWidth = 100,
         paddleHeight = 20,
         totalBlockWidth = blockColSize * blockWidth + (blockColSize - 1) * blockSpacing,
@@ -18,8 +19,8 @@ const   canvas = document.getElementById("wallbreaker"),
 
 let x = canvasWidth / 2,
     y = canvasHeight-((paddleWidth)/2)-ballRadius*2,
-    dx = 5,
-    dy = -5,
+    dx = 3,
+    dy = -3,
     fillstyle = fillstyles[0],
     paddlePosition = (canvas.width - paddleWidth) / 2,
     paddleSpeed = 5,
@@ -29,10 +30,6 @@ let x = canvasWidth / 2,
 
 canvas.setAttribute("width", canvasWidth);
 canvas.setAttribute("height", canvasHeight);
-
-document.addEventListener("keydown", keyDownHandler, false);
-document.addEventListener("keyup", keyUpHandler, false);
-
 
 // pour la raquette
 function drawPaddle() {
@@ -53,27 +50,29 @@ context.closePath();
 
 function drawBlocks() {
 // pour les blocks
-const blocks = [];
+
 for (let col = 0; col < blockColSize; col++) {
-    blocks[col] = [];
+    blockArray[col] = [];
     for (let row = 0; row < blockRowSize; row++) {
-        blocks[col][row] = { x: 0, y: 0 };
+        blockArray[col][row] = { x: 0, y: 0, status: true, fillStyle: fillstyles[(row % blockRowSize)-1] };
     }
 }
     for (let col = 2; col < blockColSize-2; col++) {
         for (let row = 1; row < blockRowSize; row++) {
+            if (blockArray[col][row].status === true) {
             const blockX = blockOffset + col * (blockWidth + blockSpacing);
             const blockY = row * (blockHeight + blockSpacing);
 
-            blocks[col][row].x = blockX;
-            blocks[col][row].y = blockY;
+            blockArray[col][row].x = blockX;
+            blockArray[col][row].y = blockY;
             context.beginPath();
             context.rect(blockX, blockY, blockWidth, blockHeight);
             context.strokeStyle = "white";
             context.stroke();
-            context.fillStyle = "#FF0000";
+            context.fillStyle = blockArray[col][row].fillStyle;
             context.fill();
             context.closePath();
+            }
         }
     }
 }
@@ -90,62 +89,22 @@ function drawBall () {
     context.closePath();
     x += dx;
     y += dy
-    if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
-        dx = -dx;
-        changeColour();
-    }
-    if (y + dy < ballRadius) {
-        dy = -dy;
-        changeColour();
-    } else if (y + dy > canvasHeight - ballRadius/2) {
-        if (x > paddlePosition && x < paddlePosition + paddleWidth + ballRadius/2) {
-            dy = -dy;
-            // console.log("paddleCollision");
-            changeColour();
-        } else {
-            alert("GAME OVER");
-            clearInterval(gameInterval);
-            document.location.reload();
-        }
-    }
-
 
 }
-function changeColour() {
-    let newColour = Math.floor(Math.random() * fillstyles.length);
-    fillstyle = fillstyles[newColour];
-}
-function keyDownHandler(e) {
-    if (e.key === "Right" || e.key === "ArrowRight") {
-        rightPressed = true;
-        console.log("right pressed");
-    } else if (e.key === "Left" || e.key === "ArrowLeft") {
-        leftPressed = true;
-        console.log("left pressed");
-    }
-}
 
-function keyUpHandler(e) {
-    if (e.key === "Right" || e.key === "ArrowRight") {
-        rightPressed = false;
-        console.log("right depressed");
-    } else if (e.key === "Left" || e.key === "ArrowLeft") {
-        leftPressed = false;
-        console.log("left depressed");
-    }
-}
 
 function beginWallGame() {
     wallbreakerStartButton.disabled = true;
 gameInterval = setInterval(() => {
     drawBall();
- //   drawBlocks();
+    drawBlocks();
     drawPaddle();
+    collisionDetection();
 }, 10);
 }
 wallbreakerStartButton.addEventListener('click', beginWallGame);
 
 drawBall();
-// drawBlocks();
+drawBlocks();
 drawPaddle();
 // ADD SCREENWIDTH DETECTOR (the usual one) AND WIDTH-REACTION BASED ON IT

@@ -34,6 +34,7 @@
 
 <script src="scripts/sharedScript.js"></script>
 <script src="scripts/startWalls.js"></script>
+<script src="scripts/runWalls.js"></script>
 
 </body>
 </html>
