@@ -18,7 +18,7 @@
     <div id="gameHolder" class="container-fluid flex flex-row justify-evenly">
         <?php
             foreach ($allGames as $game) {
-                if ($game["jsl_game_name"] == "Snake") {
+                if ($game["jsl_game_name"] == "Snake" || $game["jsl_game_name"] == "Arkanoid?") {
                     $backSize = "contain";
                 }else {
                     $backSize = "cover";

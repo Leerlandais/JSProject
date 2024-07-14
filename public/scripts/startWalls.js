@@ -53,10 +53,15 @@ context.fill();
 context.closePath();
 }
 
-function drawBlocks() {
+for (let col = 0; col < blockColSize; col++) {
+    blockArray[col] = [];
+    for (let row = 0; row < blockRowSize; row++) {
+        blockArray[col][row] = { x: 0, y: 0, status: true, fillStyle: fillstyles[(col % blockRowSize)-1] };
+    }
+}
+
 // pour les blocks
-
-
+function drawBlocks() {
     for (let col = 2; col < blockColSize-2; col++) {
         for (let row = 1; row < blockRowSize; row++) {
 
@@ -98,19 +103,14 @@ function beginWallGame() {
     wallbreakerStartButton.disabled = true;
     gameRunning = true;
 gameInterval = setInterval(() => {
+    collisionDetection();
     drawBall();
     drawBlocks();
     drawPaddle();
-    collisionDetection();
 }, 10);
 }
 wallbreakerStartButton.addEventListener('click', beginWallGame);
-for (let col = 0; col < blockColSize; col++) {
-    blockArray[col] = [];
-    for (let row = 0; row < blockRowSize; row++) {
-        blockArray[col][row] = { x: 0, y: 0, status: true, fillStyle: fillstyles[(row % blockRowSize)-1] };
-    }
-}
+
 
 drawBall();
 drawBlocks();

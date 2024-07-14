@@ -26,9 +26,8 @@ function collisionDetection () {
     for (let c = 0; c < blockColSize; c++) {
         for (let r = 0; r < blockRowSize; r++) {
             const b = blockArray[c][r];
-            if (b.status) { // Check if the block is still active
+            if (b.status) {
                 if (x > b.x - ballRadius && x < b.x + blockWidth + ballRadius/2 && y > b.y - ballRadius/2 && y < b.y + blockHeight + ballRadius/2) {
-                    // Determine where the collision occurred
                     const ballCenterX = x;
                     const ballCenterY = y;
                     const blockCenterX = b.x + blockWidth / 2;
@@ -40,13 +39,11 @@ function collisionDetection () {
                     const absDistY = Math.abs(distY);
 
                     if (absDistX > absDistY) {
-                        // Collision on the sides
                         dx = -dx;
                     } else {
-                        // Collision on the top or bottom
                         dy = -dy;
                     }
-                    b.status = false; // Deactivate the block
+                    b.status = false;
                 }
             }
         }
