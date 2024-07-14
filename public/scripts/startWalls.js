@@ -15,10 +15,18 @@ const   canvas = document.getElementById("wallbreaker"),
         blockOffset = (canvasWidth - totalBlockWidth) / 2;
 
 
+let x = canvasWidth / 2,
+    y = canvasHeight-((paddleWidth)/2)-ballRadius*2,
+    dx = 2,
+    dy = -2;
+
+
+
 canvas.setAttribute("width", canvasWidth);
 canvas.setAttribute("height", canvasHeight);
 
 // pour la raquette
+function drawPaddle() {
 context.beginPath();
 context.rect((canvasWidth/2)-(paddleWidth/2), canvasHeight-(paddleHeight*3), paddleWidth, paddleHeight);
 context.strokeStyle = "black";
@@ -26,17 +34,9 @@ context.stroke();
 context.fillStyle = "#00FF00";
 context.fill();
 context.closePath();
+}
 
-// pour le ballon
-context.beginPath();
-context.arc((canvasWidth/2), canvasHeight-((paddleWidth)/2)-ballRadius*2, ballRadius, 0, Math.PI * 2, false);
-context.strokeStyle = "rgb(255 255 255)";
-context.stroke();
-context.fillStyle = "#8f12d7";
-context.fill();
-context.closePath();
-
-
+function drawBlocks() {
 // pour les blocks
 const blocks = [];
 for (let col = 0; col < blockColSize; col++) {
@@ -45,7 +45,6 @@ for (let col = 0; col < blockColSize; col++) {
         blocks[col][row] = { x: 0, y: 0 };
     }
 }
-function drawBlocks() {
     for (let col = 2; col < blockColSize-2; col++) {
         for (let row = 1; row < blockRowSize; row++) {
             const blockX = blockOffset + col * (blockWidth + blockSpacing);
@@ -63,6 +62,41 @@ function drawBlocks() {
         }
     }
 }
+/*
+function drawBall () {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.beginPath();
+    context.arc(x, y, 10, 0, Math.PI * 2);
+    context.fillStyle = "#0095DD";
+    context.fill();
+    context.closePath();
+    x += dx;
+    y += dy
+}
+*/
+function drawBall () {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.beginPath();
+    context.arc(x, y, ballRadius, 0, Math.PI * 2, false);
+   // context.arc(x, y, 10, 0, Math.PI * 2);
+    context.fillStyle = "#8f12d7";
+    context.fill();
+    context.strokeStyle = "rgb(255 255 255)";
+    context.stroke();
+    context.closePath();
+    x += dx;
+    y += dy
+}
+function beginWallGame() {
+setInterval(() => {
+    drawBall();
+    drawBlocks();
+    drawPaddle();
+}, 10);
+}
+wallbreakerStartButton.addEventListener('click', beginWallGame);
 
+drawBall();
 drawBlocks();
+drawPaddle();
 // ADD SCREENWIDTH DETECTOR (the usual one) AND WIDTH-REACTION BASED ON IT
