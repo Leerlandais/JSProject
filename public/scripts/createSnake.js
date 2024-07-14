@@ -118,6 +118,6 @@ function createSnake() {
             }
         }
     });
-
+// et SURTOUT n'oublie pas de placer le premier nourriture
 placeFood();
 }
