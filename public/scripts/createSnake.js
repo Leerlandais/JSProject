@@ -3,7 +3,7 @@
 
 function prepareFood() {
     // afin d'avoir plusieurs possibilités d'image choisi aléatoirement
-    foodImage = Math.floor(Math.random() * spiderImages.length);
+    foodCount = Math.floor(Math.random() * spiderImages.length);
     consumedFood++;
 
     const maxWidth = Math.floor(canvasWidth / snakeSegment);
@@ -24,7 +24,7 @@ function prepareFood() {
 function placeFood() {
     // création du nourriture selon l'image choisi au dessus
     let img = new Image();
-    img.src = spiderImages[foodImage];
+    img.src = spiderImages[foodCount];
     context.drawImage(img, foodX, foodY, snakeSegment, snakeSegment);
 }
 
@@ -119,4 +119,5 @@ function createSnake() {
         }
     });
 
+placeFood();
 }

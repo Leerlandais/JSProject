@@ -28,12 +28,13 @@ function keyListener(btnPressed) {
 }
 
 function updateSnake() {
+    // copier la position de la tête
     let newHead = {
         x: snakeBodyArray[0].x,
         y: snakeBodyArray[0].y,
         direction: snakeDirection
     };
-
+// définir la nouvelle oriéntation des segments
     if (snakeDirection === 'LEFT') {
         newHead.x -= snakeSegment;
     } else if (snakeDirection === 'RIGHT') {
@@ -43,27 +44,24 @@ function updateSnake() {
     } else if (snakeDirection === 'DOWN') {
         newHead.y += snakeSegment;
     }
-
-
+// si position horizontal ou verticak de la tête est hors canvas, game over
     if (newHead.x < 0 || newHead.x >= canvasWidth || newHead.y < 0 || newHead.y >= canvasHeight) {
-
         calculateTotalScore();
     }
+    // même chose pour contact avec le corps -- je pourrais, probablement réduire ceci car c'est impossible de auto-bouffer si length < 4
     for (let i = 1; i < snakeBodyArray.length; i++) {
         if (newHead.x === snakeBodyArray[i].x && newHead.y === snakeBodyArray[i].y) {
-
             calculateTotalScore();
         }
     }
+    // si on mange, il faut agrandie Snake et refaure le nourriture -- do it so that the Snake swells when eating
     if (newHead.x === foodX && newHead.y === foodY) {
         snakeBodyArray.push({ x: snakeX * snakeSegment, y: snakeY });
-
         prepareFood();
     }
-
+    // remplace la tête
     snakeBodyArray.unshift(newHead);
     snakeBodyArray.pop();
-
     createSnake(snakeDirection);
 }
 
