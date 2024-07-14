@@ -1,5 +1,4 @@
 // logic for Snake endgame
-
 function calculateTotalScore() {
     let bonusForSpeed = 10;
     switch(gameTimer) {
@@ -21,9 +20,7 @@ function calculateTotalScore() {
     clearInterval(gameInterval);
 
     gameOn = false;
-    let gameRestart = confirm("You scored : "+finalScoreSnake + "!\n Play Again?");
-    context.restore();
-
+    let gameRestart = confirm("You scored : "+finalScoreSnake + "!\n Play Again?"); // make this pretty
 
     if (gameRestart === true) {
         window.location.reload();

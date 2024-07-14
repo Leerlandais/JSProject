@@ -36,15 +36,13 @@
 </form>
 <div class="hidden">Fonts made from <a href="http://www.onlinewebfonts.com">Web Fonts</a> is licensed by CC BY 4.0</div>
 <!--
-<script src="scripts/endSnake.js"></script>
-<script src="scripts/newSnake.js"></script>
-<script src="scripts/sharedScript.js"></script>
+pour voir si cela fonctionnerait, j'ai séparé les scripts. Tout va bien mais faites attention à l'ordre dans lequel ils sont appelés
 -->
-<script src="scripts/sharedScript.js"></script>
-<script src="scripts/startSnake.js"></script>
-<script src="scripts/stopSnake.js"></script>
-<script src="scripts/createSnake.js"></script>
-<script src="scripts/moveSnake.js"></script>
+<script src="scripts/sharedScript.js"></script> <!-- Pour gerer certains choses qui sont présent sur toutes les pages -->
+<script src="scripts/startSnake.js"></script> <!-- Utilisé pour précharger les images afin d'éviter les problèmes d'affichage -->
+<script src="scripts/stopSnake.js"></script> <!-- Pour calculer le score à fin de jeu - Bientôt en plus jolie -->
+<script src="scripts/createSnake.js"></script> <!-- Gère la création du serpent et de la nourriture -->
+<script src="scripts/moveSnake.js"></script> <!-- Écouteurs de boutons et détection de collision -->
 </body>
 </html>
 

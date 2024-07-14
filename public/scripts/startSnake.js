@@ -1,19 +1,17 @@
 // pre game logic containing global variable creation
 
-const canvas = document.getElementById("snake"),
-    context = canvas.getContext('2d');
-const snakeSegment = 30,
-    snakeBaseLength = 5;
+// Pour permettre à tous les autres scripts d'y accéder, les constantes sont déclarées ici plutôt que dans le cadre des fonctions.
+const   canvas = document.getElementById("snake"),
+        context = canvas.getContext('2d'),
+        snakeSegment = 30,
+        snakeBaseLength = 5,
+        segmentsWidth = 30,
+        segmentsHeight = 20,
+        snakeStartButton = document.getElementById("snakeStartButton"),
+        speedSelect = document.getElementById("speedSelect"),
+        canvasWidth = snakeSegment * segmentsWidth,
+        canvasHeight = snakeSegment * segmentsHeight;
 
-const segmentsWidth = 30;
-const segmentsHeight = 20;
-const snakeStartButton = document.getElementById("snakeStartButton");
-const speedSelect = document.getElementById("speedSelect");
-const canvasWidth = snakeSegment * segmentsWidth;
-const canvasHeight = snakeSegment * segmentsHeight;
-canvas.setAttribute("width", canvasWidth);
-canvas.setAttribute("height", canvasHeight);
-context.save();
 const snakeImages = [
     'images/snake/head_left.png',
     'images/snake/head_right.png',
@@ -38,61 +36,69 @@ const spiderImages = [
     'images/snake/spider4.svg',
     'images/snake/spider5.svg'
 ]
+// idem pour les mutables
 let gameTimer = 100,
     foodCount = 0,
     consumedFood = 0,
     snakeBodyArray = [],
+    gameOn = false,
+    foodX, foodY,
+    gameInterval,
     playerScore = document.getElementById("playerScores"),
-    currentHighScore = playerScore.value;
+    currentHighScore = playerScore.value; // gonna run this as local storage
 
 
-const images = [];
+// définer la taille du canvas
+canvas.setAttribute("width", canvasWidth);
+canvas.setAttribute("height", canvasHeight);
+
 function preloadImages(sources, callback) {
+    // préparation des images du Snake avant que le jeu commence
+    // sinon, au haut vitesse, il y à des trous dans l'image (à leur premier utilisation (très visible avec les segments courbés))
+const images = [];
     let loadedImagesCount = 0;
     for (let i = 0; i < sources.length; i++) {
+        // boucle sur les images jusqu'à toutes sont chargés
         images[i] = new Image();
         images[i].src = sources[i];
-
         images[i].onload = () => {
             loadedImagesCount++;
             if (loadedImagesCount === sources.length) {
+                // signaler completion de la tâche
                 callback();
             }
         };
         images[i].onerror = () => {
+            // signaler erreur
             console.error(`Failed to load image: ${sources[i]}`);
         };
     }
 }
 preloadImages(snakeImages, () => {
+    // en completion du preloadImages, affiche succès
     console.log('All images preloaded');
 });
 
+// placement du Snake au milieu du canvas et définir direction originale
 let snakeX = canvasWidth/ 2,
-    snakeY = canvasHeight / 2;
-let snakeDirection = "LEFT";
+    snakeY = canvasHeight / 2,
+    snakeDirection = "LEFT";
 
-
+// création du corps du Snake
 for (let i = 0; i < snakeBaseLength; i++) {
     snakeBodyArray.push({ x: snakeX + i * snakeSegment, y: snakeY, direction: snakeDirection });
 }
-let gameOn = false;
-let foodX, foodY;
-
-let gameInterval;
 
 snakeStartButton.addEventListener("click", startGameSnake);
-
-
 function startGameSnake () {
-    snakeStartButton.disabled = true;
+    snakeStartButton.disabled = true; // les choses tournent mal si ce bouton est trop cliquer donc désactivation pendant que le jeu passe
     gameTimer = speedSelect.value;
-    speedSelect.disabled = true;
-    gameOn = true;
-    document.addEventListener('keydown', keyListener);
+    speedSelect.disabled = true; // plus besoin de ceci non plus
+    gameOn = true;  // signal l'interval qu'il peut commencer
+    document.addEventListener('keydown', keyListener); // maintenant activer l'ecouter (si fait avant, Snake bouge)
     gameInterval = setInterval(() => {
         if(gameOn === true){
             updateSnake();
         }
-    }, gameTimer);
+    }, gameTimer); // vitesse selon choix de joueur
 }

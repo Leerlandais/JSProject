@@ -5,13 +5,13 @@ const   canvas = document.getElementById("wallbreaker"),
         blockHeight = 30,
         blockSpacing = 10,
         blockRowSize = 5,
-        blockColSize = 15,
+        blockColSize = 7,
         blockArray = [],
         paddleWidth = 100,
         paddleHeight = 20,
         totalBlockWidth = blockColSize * blockWidth + (blockColSize - 1) * blockSpacing,
         wallbreakerStartButton = document.getElementById("wallbreakerStartButton"),
-        canvasWidth = (ballRadius*2) * blockWidth*0.7,
+        canvasWidth = (ballRadius*2) * blockWidth*0.6,
         canvasHeight = ((ballRadius*2) * blockHeight),
         blockOffset = (canvasWidth - totalBlockWidth) / 2,
         fillstyles = ["red", "blue", "green", "yellow", "black", "orange", "violet"];
@@ -62,7 +62,7 @@ for (let col = 0; col < blockColSize; col++) {
 
 // pour les blocks
 function drawBlocks() {
-    for (let col = 2; col < blockColSize-2; col++) {
+    for (let col = 1; col < blockColSize-1; col++) {
         for (let row = 1; row < blockRowSize; row++) {
 
             if (blockArray[col][row].status === true) {
@@ -82,6 +82,27 @@ function drawBlocks() {
         }
     }
 }
+
+/* Version avec images - à travailler
+const blockImage = new Image();
+blockImage.src = 'images/brick.svg';
+// pour les blocks
+function drawBlocks() {
+    for (let col = 1; col < blockColSize-1; col++) {
+        for (let row = 1; row < blockRowSize; row++) {
+            if (blockArray[col][row].status === true) {
+                const blockX = blockOffset + col * (blockWidth + blockSpacing);
+                const blockY = row * (blockHeight + blockSpacing);
+
+                blockArray[col][row].x = blockX;
+                blockArray[col][row].y = blockY;
+
+                context.drawImage(blockImage, blockX, blockY, blockWidth, blockHeight);
+            }
+        }
+    }
+}
+ */
 
 function drawBall () {
     context.clearRect(0, 0, canvas.width, canvas.height);
