@@ -32,3 +32,8 @@ canvas{
     background: rgba(0, 0, 0, .6);
     margin: 5vh auto;
 }
+#myModal{
+    display: none;
+    position: fixed;
+    top: 0;
+}

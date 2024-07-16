@@ -1,4 +1,17 @@
 // logic for Snake endgame
+const myModal = document.getElementById("myModal"),
+      snakeScore = document.getElementById("snakeScore"),
+      replayButton = document.getElementById("replayButton"),
+      quitButton = document.getElementById("quitButton");
+
+
+replayButton.addEventListener("click", function() {
+    window.location.reload();
+})
+
+quitButton.addEventListener("click", function() {
+    window.open("?route=home", "_self");
+})
 function calculateTotalScore() {
     let bonusForSpeed = 10;
     switch(gameTimer) {
@@ -20,6 +33,9 @@ function calculateTotalScore() {
     clearInterval(gameInterval);
 
     gameOn = false;
+     myModal.style.display = "block";
+     snakeScore.textContent = finalScoreSnake;
+    /*
     let gameRestart = confirm("You scored : "+finalScoreSnake + "!\n Play Again?"); // make this pretty
 
     if (gameRestart === true) {
@@ -27,5 +43,5 @@ function calculateTotalScore() {
     }else {
         window.open("?route=home", "_self");
     }
-
+*/
 }

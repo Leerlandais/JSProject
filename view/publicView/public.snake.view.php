@@ -21,12 +21,29 @@
         <select id="speedSelect" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-auto h-10 mx-auto px-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
         <option value="200">200</option>
         <option value="150">150</option>
-        <option value="100" selected>100</option>
-        <option value="50">50</option>
+        <option value="100" >100</option>
+        <option value="50" selected>50</option>
     </select>
 </div>
     <button id="snakeStartButton" class="bg-gradient-to-b w-max mx-auto my-12 text-blue-500 font-semibold from-slate-50 to-blue-100 px-10 py-3 rounded-2xl shadow-blue-600 shadow-md border-b-4 hover border-b border-blue-200 hover:shadow-sm transition-all duration-500">Begin</button>
 
+
+    <div class="flex items-center mx-auto w-full h-full bg-transparent" id="myModal">
+            <div class="w-[25%] mt-96 mx-auto rounded-lg bg-indigo-600">
+                <div class="w-full mx-auto lg:px-24"
+                            <div class="p-6">
+                                <p class="mt-5 text-2xl font-semibold text-3xl">Game Over</p>
+                                <p class="mt-3 text-base  text-center text-black">You Scored : <span id="snakeScore"></span></p>
+                                <div class="w-full mt-6 pb-6 flex flex-row justify-between">
+                                        <button id="replayButton">Play Again</button><button id="quitButton">Quit</button>
+                                </div>
+                            </div>
+
+
+                </div>
+            </div>
+
+    </div>
     <footer>
         &copy; <a href="https://leerlandais.com" target="_blank">Lee Brennan</a>
     </footer>
