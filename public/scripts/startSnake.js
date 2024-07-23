@@ -10,7 +10,8 @@ const   canvas = document.getElementById("snake"),
         snakeStartButton = document.getElementById("snakeStartButton"),
         speedSelect = document.getElementById("speedSelect"),
         canvasWidth = snakeSegment * segmentsWidth,
-        canvasHeight = snakeSegment * segmentsHeight;
+        canvasHeight = snakeSegment * segmentsHeight,
+        highScoreDisplay = document.getElementById("highScoreDisplay");
 
 const snakeImages = [
     'images/snake/head_left.png',
@@ -36,7 +37,7 @@ const spiderImages = [
     'images/snake/spider4.svg',
     'images/snake/spider5.svg'
 ]
-if (!localStorage.getItem("highScore")) localStorage.setItem("highScore", 0);
+if (!localStorage.getItem("highScore")) localStorage.setItem("highScore", "0");
 // idem pour les mutables
 let gameTimer = 100,
     foodCount = 0,
@@ -45,9 +46,9 @@ let gameTimer = 100,
     gameOn = false,
     foodX, foodY,
     gameInterval,
-    playerScore = document.getElementById("playerScores"),
     currentHighScore = localStorage.getItem('highScore');
-console.log(currentHighScore);
+
+highScoreDisplay.textContent = currentHighScore;
 
 
 // définer la taille du canvas

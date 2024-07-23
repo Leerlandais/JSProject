@@ -12,7 +12,7 @@
 <body>
 <div id="globalDiv">
     <h1 id="mainHeading"></h1>
-    <h2 id="subHeading"></h2>
+    <h2 id="subHeading" class="text-3xl">Highest Score : <span id="highScoreDisplay" class="text-2xl text-gray-300"></span></h2>
 
     <canvas id="snake"></canvas>
 
@@ -34,6 +34,8 @@
                             <div class="p-6">
                                 <p class="mt-5 text-2xl font-semibold text-3xl">Game Over</p>
                                 <p class="mt-3 text-base  text-center text-black">You Scored : <span id="snakeScore"></span></p>
+                                <p class="mt-3 text-base  text-center text-green-500" id="highScore"></p>
+
                                 <div class="w-full mt-6 pb-6 flex flex-row justify-between">
                                         <button id="replayButton">Play Again</button><button id="quitButton">Quit</button>
                                 </div>
@@ -48,9 +50,7 @@
         &copy; <a href="https://leerlandais.com" target="_blank">Lee Brennan</a>
     </footer>
 </div>
-<form action="./" method="POST" id="snakeScoreForm">
-    <input type="text" name="playerScore" id="playerScores" value="<?=$leaderScores["jsl_score_value"]?>">
-</form>
+
 <div class="hidden">Fonts made from <a href="http://www.onlinewebfonts.com">Web Fonts</a> is licensed by CC BY 4.0</div>
 <!--
 pour voir si cela fonctionnerait, j'ai séparé les scripts. Tout va bien mais faites attention à l'ordre dans lequel ils sont appelés

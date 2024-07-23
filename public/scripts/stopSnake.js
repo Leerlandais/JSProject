@@ -2,7 +2,8 @@
 const myModal = document.getElementById("myModal"),
       snakeScore = document.getElementById("snakeScore"),
       replayButton = document.getElementById("replayButton"),
-      quitButton = document.getElementById("quitButton");
+      quitButton = document.getElementById("quitButton"),
+      highScore = document.getElementById("highScore");
 
 
 replayButton.addEventListener("click", function() {
@@ -37,7 +38,8 @@ function calculateTotalScore() {
      snakeScore.textContent = finalScoreSnake.toString();
      console.log("final score = "+finalScoreSnake);
      if (finalScoreSnake > currentHighScore) {
-         alert("Congrats: That's a new high score!")
+     highScore.textContent = "Congrats: That's a new high score!";
+
          localStorage.setItem("highScore", finalScoreSnake.toString());
      }
     /*
