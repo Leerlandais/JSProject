@@ -34,7 +34,12 @@ function calculateTotalScore() {
 
     gameOn = false;
      myModal.style.display = "block";
-     snakeScore.textContent = finalScoreSnake;
+     snakeScore.textContent = finalScoreSnake.toString();
+     console.log("final score = "+finalScoreSnake);
+     if (finalScoreSnake > currentHighScore) {
+         alert("Congrats: That's a new high score!")
+         localStorage.setItem("highScore", finalScoreSnake.toString());
+     }
     /*
     let gameRestart = confirm("You scored : "+finalScoreSnake + "!\n Play Again?"); // make this pretty
 

@@ -36,6 +36,7 @@ const spiderImages = [
     'images/snake/spider4.svg',
     'images/snake/spider5.svg'
 ]
+if (!localStorage.getItem("highScore")) localStorage.setItem("highScore", 0);
 // idem pour les mutables
 let gameTimer = 100,
     foodCount = 0,
@@ -45,7 +46,8 @@ let gameTimer = 100,
     foodX, foodY,
     gameInterval,
     playerScore = document.getElementById("playerScores"),
-    currentHighScore = playerScore.value; // gonna run this as local storage
+    currentHighScore = localStorage.getItem('highScore');
+console.log(currentHighScore);
 
 
 // définer la taille du canvas
